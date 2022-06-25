@@ -1,13 +1,12 @@
-MY_QUERY = """
+gp_practice_query="""
+DROP TABLE IF EXISTS gp_practice;
 
-DROP TABLE IF EXISTS GP;
-
-CREATE TABLE GP (
-    GP_ID INT PRIMARY KEY,
-    GP_PRACTICE VARCHAR(50),
-    LATITUDE NUMERIC,
-    LONGITUDE NUMERIC,
-	PERCENTAGE DECIMAL,
+CREATE TABLE gp_practice (
+    index INT PRIMARY KEY,
+    gp_practice VARCHAR(50),
+    latitude DECIMAL,
+    longitude DECIMAL,
+	asthma_percentage DECIMAL,
     aqi DECIMAL,
 	co DECIMAL,
 	no DECIMAL,
@@ -18,7 +17,22 @@ CREATE TABLE GP (
 	pm10 DECIMAL,
 	nh3 DECIMAL
 );
+"""
 
+air_pollution_query="""
+DROP TABLE IF EXISTS air_pollution_data;
 
-
+CREATE TABLE air_pollution_data (
+    index INT PRIMARY KEY,
+    air_quality_index DECIMAL,
+    carbon_monoxide NUMERIC,
+    nitrogen_monoxide NUMERIC,
+	nitrogen_dioxide DECIMAL,
+    ozone DECIMAL,
+	sulphur_dioxide DECIMAL,
+	ammonia DECIMAL,
+	particultes_pm2_5 DECIMAL,
+	particulates_pm_10 DECIMAL,
+	practice_name VARCHAR(50)
+);
 """

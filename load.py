@@ -2,18 +2,19 @@ import requests
 import pandas as pd
 import sqlalchemy
 from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database 
-from queries import MY_QUERY
-from config import postgresPass
+from sqlalchemy_utils import database_exists, create_database
 
-GP_df = pd.read_csv("GP_data.csv", index_col=0)
-Sample_df = pd.read_csv("Sample_data.csv", index_col=0)
-# lets assume we have our data in a dataframe called GP_df
+from config import postgresPass
+from queries import gp_practice_query
+from queries import air_pollution_query
+
+GP_PRACTICE_DF=pd.read_csv("gp_practice.csv")
+GP_TIME_DATA_DF=pd.read_csv("air_pollution_data.csv")
 
 usr = 'postgres'
 pwd = postgresPass
 port = '5432'
-db_name = 'test_db'
+db_name = 'birmingham_air_pollution'
 
 engine = create_engine(f'postgresql://{usr}:{pwd}@localhost:{port}/{db_name}')
 
@@ -23,15 +24,12 @@ if not database_exists(engine.url):
 
 print("Database exists?", database_exists(engine.url))
 
-engine.execute(MY_QUERY)
+engine.execute(gp_practice_query)
+engine.execute(air_pollution_query)
 
 try:
-    GP_df.to_sql(name = 'GP', con = engine, if_exists='replace')
+    GP_PRACTICE_DF.to_sql(name = 'gp_practice', con = engine, if_exists='replace')
+    GP_TIME_DATA_DF.to_sql(name = 'air_pollution_data', con = engine, if_exists='replace')
+    
 except Exception as e:
     print(e)
-
-results = engine.execute("SELECT * FROM GP;")
-for row in results:
-    print(row)
-
-
