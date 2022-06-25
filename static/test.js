@@ -1,6 +1,6 @@
 
-x = dataOut.data
-y = dataOut.data2
+x = dataOut.airqual
+y = dataOut.asthma
 
 
 

@@ -1,13 +1,3 @@
-// Get the endpoint
-// Fetch the JSON data and console log it
-url = d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json")
-
-url.then(function(dataThing) {
-    console.log('the data: ');
-    console.log(dataThing);
-
-});
-
 
 
 
@@ -137,21 +127,24 @@ function optionChanged(testSubject) {
         };
         Plotly.newPlot('bubble', data, layout);
     });
-
 }
 
 
-// Display the default plot
-function init() {
+// Display the default plots
+function init(GP, AIR) {
+    // instantiate from the initial data passed from flask app.py to index.html to here
+    
+   
+    
 
-    url.then(function(data2) {
-        let defaultTestSubject = data2.samples[0].id;
+    GP.then(function(data) {
+        let defaultGP = data.GP[0].id;
 
 
         // Use D3 to select the dropdown and add options to it;
         let dropDown = d3.select("#selDataset");
         var options = dropDown.selectAll("option")
-            .data(data2.names)
+            .data(intial_data.names)
             .enter()
             .append("option");
 
@@ -163,9 +156,11 @@ function init() {
             });
 
 
-        optionChanged(defaultTestSubject)
+        //optionChanged(intial_data)
 
     });
 }
 
-init();
+console.log(type(gp_practice_dict));
+
+init(gp_practice_dict, air_pollution_data);
