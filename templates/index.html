@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="well">
                     <h5>nearest GP:</h5>
                     <select id="selDataset" onchange="optionChanged(this.value)">
@@ -38,11 +38,13 @@
                     <div id="sample-metadata" class="panel-body"></div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div id="time series"></div>
+            <div class="col-md-8">
+                <div id="time-graph"></div>
             </div>
-            <div class="col-md-5">
-                <div id="scatter"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div id="scat"></div>
             </div>
         </div>
     </div>
@@ -52,10 +54,8 @@
     
     <script>
         console.log("checkpoint 1");
-        var gp_practice_dict = {{data[0]|tojson}};
-        console.log(typeof gp_practice_dict);
-        var air_pollution_data = {{data[0]|tojson}};
-        console.log(typeof air_pollution_data);
+        var gp_practice_dict = {{data1|tojson}};
+        var air_pollution_data = {{data2|tojson}};
     </script>
     <script src="./static/js/app.js"></script>
 

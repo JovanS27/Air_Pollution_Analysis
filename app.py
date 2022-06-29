@@ -45,8 +45,8 @@ for i in air_pollution:
     times.append(i[1])
     metadata.append({'id':i[0],'time':i[1],'aqi':i[2],'co':i[3],'no':i[4],'no2':i[5],'o3':i[6],'so2':i[7],'nh3':i[8],'pm2_5':i[9],'pm10':i[10],'gp':i[11]})
 
-names=np.unique(names)
-times=np.unique(times)
+names=np.unique(names).tolist()
+times=np.unique(times).tolist()
 
 air_pollution_data={'gp':names,'date_time':times,'metadata':metadata}
 
@@ -61,7 +61,7 @@ def main():
 
 
     results = [gp_practice_dict,air_pollution_data]
-    return render_template('index.html', data = results)
+    return render_template('index.html', data1 = gp_practice_dict, data2 = air_pollution_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
