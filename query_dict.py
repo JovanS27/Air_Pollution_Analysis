@@ -16,6 +16,8 @@ QUERY="""SELECT * FROM air_pollution_data
 """
 air_pollution = engine.execute(QUERY)
 
+national_gp=engine.execute("SELECT * FROM national_gp;")
+
 
 names=[]
 metadata=[]
@@ -38,5 +40,14 @@ names=np.unique(names)
 times=np.unique(times)
 
 air_pollution_data={'gp':names,'date_time':times,'metadata':metadata}
+
+names=[]
+metadata=[]
+for i in national_gp:
+    names.append(i[1])
+    metadata.append({'id':i[0],'gp':i[1],'lat':i[2],'lon':i[3],'asthma_percentage':i[4],'aqi':i[5],'co':i[6],'no':i[7],'no2':i[8],'o3':i[9],'so2':i[10],'pm2_5':i[11],'pm10':i[12],'nh3':i[13]})
+    print(i)
+    
+national_gp_dict={'gp':names,'metadata':metadata}
 
 
