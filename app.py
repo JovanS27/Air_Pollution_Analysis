@@ -21,9 +21,12 @@ engine = create_engine(f'postgresql://{usr}:{pwd}@localhost:{port}/{db_name}')
 gp_practice = engine.execute("SELECT * FROM gp_practice;")
 
 QUERY="""SELECT * FROM air_pollution_data
-    WHERE date >= 1622502000 and date <= 1623106800;
+    WHERE date >= 1622502000 and date <= 1654034400;
 """
 air_pollution = engine.execute(QUERY)
+
+
+national_gp=engine.execute("SELECT * FROM national_gp;")
 
 
 # creates dictionary for GP practise data
@@ -51,6 +54,16 @@ times=np.unique(times).tolist()
 air_pollution_data={'gp':names,'date_time':times,'metadata':metadata}
 
 
+names=[]
+metadata=[]
+for i in national_gp:
+    names.append(i[1])
+    metadata.append({'id':i[0],'gp':i[1],'lat':i[2],'lon':i[3],'asthma_percentage':i[4],'aqi':i[5],'co':i[6],'no':i[7],'no2':i[8],'o3':i[9],'so2':i[10],'pm2_5':i[11],'pm10':i[12],'nh3':i[13]})
+    print(i)
+    
+national_gp_dict={'gp':names,'metadata':metadata}
+
+
 @app.route('/')
 def main():
 
@@ -60,8 +73,7 @@ def main():
     #             {'id': 2, 'GP name': 'poplar road', 'lat': 52.35, 'lon': -1.6, 'airqual': 3, 'asthma': 3.6}]
 
 
-    results = [gp_practice_dict,air_pollution_data]
-    return render_template('index.html', data1 = gp_practice_dict, data2 = air_pollution_data)
+    return render_template('index.html', data0 = national_gp_dict, data1 = gp_practice_dict, data2 = air_pollution_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

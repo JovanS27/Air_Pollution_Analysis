@@ -1,4 +1,3 @@
-
 let globalGP = {};
 
 function optionChanged(calledGP) {
@@ -11,6 +10,7 @@ function optionChanged(calledGP) {
     console.log(GPid);
     let currentGP = gp_practice_dict.metadata[GPid];
     globalGP = currentGP;
+    
 
     //instantiate the metadata
     console.log("checkpoint infopanel");
@@ -84,14 +84,22 @@ function optionChanged(calledGP) {
         xaxis: {
             autorange: true,
             type: 'linear',
-            rangeselector: {buttons: [        
-                {        
-                  count: 1,        
-                  label: '24 hours',        
+            rangeselector: {buttons: [
+                {    
+                  count: 7,        
+                  label: '1 week',        
                   step: 'day',        
                   stepmode: 'backward'        
+                },        
+                {        
+                  count: 1,        
+                  label: '1 Month',        
+                  step: 'month',        
+                  stepmode: 'backward'        
                 },
+        
                 {step: 'all'}
+        
               ]},
             rangeslider: {range: [dateStrings[0], dateStrings[dateStrings.length - 1]]},
             type: 'date'
@@ -108,27 +116,26 @@ function optionChanged(calledGP) {
     // Render the plot to the div tag with id "time-graph"
     Plotly.newPlot("time-graph", traceData, layout);
 
-    newScat(airKeys[0], currentGP);
+    newScat(airKeys[0]);
 
-    //new HEATMAP
 
 };
 
-function newScat(calledPollutant, currentGP = globalGP){
+function newScat(calledPollutant){
     // new SCATTER DIAGARM
     console.log("new scatter");
     scatterX = [];
     scatterY = [];
     scatter_labels = [];
-    scatter_colours = [];
+    var violist = []
 
-    console.log(gp_practice_dict.gp.length);
+    console.log(national_gp_dict.gp.length);
     
-    for (let i = 0; i < gp_practice_dict.gp.length; i++) {
-        scatterX[i] = gp_practice_dict.metadata[i][calledPollutant];
-        scatterY[i]  = gp_practice_dict.metadata[i].asthma_percentage;
-        scatter_labels[i]  = gp_practice_dict.metadata[i].gp;
-        scatter_colours[i] = i
+    for (let i = 0; i < national_gp_dict.gp.length; i++) {
+        scatterX[i] = national_gp_dict.metadata[i][calledPollutant];
+        scatterY[i]  = national_gp_dict.metadata[i].asthma_percentage;
+        scatter_labels[i]  = national_gp_dict.metadata[i].gp;
+        violist[i] = national_gp_dict.metadata[i][calledPollutant]
     }
     
     console.log("czechpoint scatter");
@@ -147,22 +154,22 @@ function newScat(calledPollutant, currentGP = globalGP){
         mode: 'markers',
         marker: {
             size: 13,
-            color: scatter_colours
+            color: '#0000FF'
         }
+    // };
+    // var highlight = {
+    //     type: "scatter",
+    //     x: [currentGP[calledPollutant]],
+    //     y: [currentGP.asthma_percentage],
+    //     text: currentGP.gp,
+    //     mode: 'markers',
+    //     opacity: 0.61,
+    //     marker: {
+    //         size: 21,
+    //         color: "#FFFF00"
+    //     }
     };
-    var highlight = {
-        type: "scatter",
-        x: [currentGP[calledPollutant]],
-        y: [currentGP.asthma_percentage],
-        text: currentGP.gp,
-        mode: 'markers',
-        opacity: 0.61,
-        marker: {
-            size: 21,
-            color: "#FFFF00"
-        }
-    };
-    data = [trace3, highlight];
+    data = [trace3];
     layout = {
         title: 'How well air quality predicts asthma prevalence',
         showlegend: false,
@@ -170,7 +177,7 @@ function newScat(calledPollutant, currentGP = globalGP){
         width: 800,
         xaxis: {
             title: {
-                text: calledPollutant
+                text: calledPollutant + ", micrograms per cubic metre"
             },
         },
         yaxis: {
@@ -180,6 +187,66 @@ function newScat(calledPollutant, currentGP = globalGP){
         }
     };
     Plotly.newPlot('scat', data, layout);
+
+    //VIOLIN PLOT
+
+    var data = [{
+        type: 'violin',          
+        x: violist,          
+        points: 'none',          
+        box: {          
+          visible: true          
+        },          
+        boxpoints: false,          
+        line: {          
+          color: 'black'          
+        },          
+        fillcolor: '#8dd3c7',          
+        opacity: 0.6,          
+        meanline: {          
+          visible: true          
+        },          
+        y0: "distribution of "+ calledPollutant + " frequency"          
+      }]          
+      
+      var layout = {          
+        title: "",  
+        width: 800,        
+        yaxis: {          
+          zeroline: false          
+        }          
+      }          
+      
+      Plotly.newPlot('violinX', data, layout);
+
+      var data = [{
+        type: 'violin',          
+        y: scatterY,          
+        points: 'none',          
+        box: {          
+          visible: true          
+        },          
+        boxpoints: false,          
+        line: {          
+          color: 'black'          
+        },          
+        fillcolor: '#8dd3c7',          
+        opacity: 0.6,          
+        meanline: {          
+          visible: true          
+        },          
+        x0: "distribution of asthma frequency"          
+      }]          
+      
+      var layout = {          
+        title: "", 
+        height: 500,         
+        yaxis: {          
+          zeroline: false          
+        }          
+      }          
+      
+      Plotly.newPlot('violinY', data, layout);
 
 };
 
@@ -232,6 +299,10 @@ function init() {
             return d;
         });
 
+        
+
+        
+
     
 
     optionChanged(defaultGP)
@@ -239,6 +310,7 @@ function init() {
 }
 
 console.log("czechpoint 2");
+console.log(national_gp_dict);
 console.log(gp_practice_dict);
 console.log(air_pollution_data);
 init();
