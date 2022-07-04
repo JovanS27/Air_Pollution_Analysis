@@ -18,8 +18,8 @@ Unfortunately this data could not be used due to the level of precision given by
 This was extracted using web scraping, the gp list was extracted by taking the drop down lists. Then using iterations, it was possible to go through each gp area and take the asthma data required. After this the OpenWeatherMap API is used just like before the get the timed data. Then prepared, imported into the database and then a dictionary is created using the data in the exact same way as the Birmingham GP data.
 
 
-visualisations and dashboard
-Visualisations
+## Visualisations and Dashboard
+### Visualisations
 
 The dataset that we had now compiled had several dimensions to it:
 •	several different measures of air quality
