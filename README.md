@@ -19,6 +19,21 @@ This was extracted using web scraping, the gp list was extracted by taking the d
 
 
 visualisations and dashboard
+Visualisations
+
+The dataset that we had now compiled had several dimensions to it:
+•	several different measures of air quality
+•	Geographic
+•	Time (granular to individual hours)
+As stated previously, when we looked just at Birmingham GPs, we found that although our time data was just as fluid and dynamic as we had hoped, there was not enough variation in the geographic data. I had hoped (foolishly) for data down to street level, but clearly this was a fantasy. So we cycled back and drew broader data at a national level, which we then re-imported and visualised. Thus our production process was cyclical rather than linear; 
+
+In order to best represent the data, we created a time series graph that represented the different measures of air quality and represented the national picture via a drop-down box. This enables the user to select which part of Birmingham they would like to investigate and view detailed information about each part. This would be represented by individual GP surgeries, as it was these that provided the local data.  Different pollutants can be selected or isolated, and the time range and be reduced to whatever timeframe is preferred.
+
+In order to investigate the causes of asthma, we generated a scatter plot that represents asthma prevalence on the y axis, and a selectable pollutant on the x axis. With this flexibility the user can cycle through pollutants and see which ones are most or least connected or correlated with asthma. This scatter plot is also augmented by two violin plots, that represent just the shape of each axis of data, allowing the national variation in these variables to be analysed in isolation.
+
+In order to see the national distribution of asthma, the dashboard also features a zoomable heatmap. This is not tied to time data, although having an heatmap that animates over time data could be an idea for a future project.
+
+Each visualisation provides clues and interesting aspects that can be used to inform each of the others. For instance, seeing that the national picture has a particularly high cluster around the northwest might inform how you interpret the data from the scatter diagram.
 
 the story/conclusions
 
