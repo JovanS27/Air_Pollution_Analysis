@@ -8,25 +8,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
+var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=1000";
 
 d3.json(url).then(function(response) {
 
   console.log(response);
 
-  var heatArray = [];
-
   for (var i = 0; i < response.length; i++) {
     var location = response[i].location;
 
     if (location) {
-      heatArray.push([location.coordinates[1], location.coordinates[0]]);
+      L.marker([location.coordinates[1], location.coordinates[0]]).addTo(myMap);
     }
   }
-
-  var heat = L.heatLayer(heatArray, {
-    radius: 20,
-    blur: 35
-  }).addTo(myMap);
 
 });

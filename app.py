@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 import flask_cors
 from config import postgresPass
 import numpy as np
+import json
 
 
 app = Flask(__name__)
@@ -63,6 +64,10 @@ for i in national_gp:
     
 national_gp_dict={'gp':names,'metadata':metadata}
 
+jsonString = json.dumps(national_gp_dict)
+jsonFile = open("national_gp_dict.json", "w")
+jsonFile.write(jsonString)
+jsonFile.close()
 
 @app.route('/')
 def main():
@@ -75,5 +80,10 @@ def main():
 
     return render_template('index.html', data0 = national_gp_dict, data1 = gp_practice_dict, data2 = air_pollution_data)
 
+# @app.route('/heatmap')
+# def heatmap():
+#     return render_template('heatmap.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
+

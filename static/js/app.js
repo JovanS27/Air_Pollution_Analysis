@@ -182,13 +182,13 @@ function newScat(calledPollutant){
         },
         yaxis: {
             title: {
-                text: "Asthma Percentage at this GP surgary"
+                text: "Asthma Percentage at English NHS centres"
             },
         }
     };
     Plotly.newPlot('scat', data, layout);
 
-    //VIOLIN PLOT
+    //VIOLIN PLOTS
 
     var data = [{
         type: 'violin',          
@@ -304,7 +304,7 @@ function init() {
         
 
     
-
+    // call the update method with the default datapoint selected.
     optionChanged(defaultGP)
 
 }
