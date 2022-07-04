@@ -1,6 +1,6 @@
 # Air Pollution Analysis
 
-## Extract, Transform, Load
+## Extract, Transform and Load
 
 Source:
 * https://fingertips.phe.org.uk/profile/general-practice/data#page/0/gid/2000006/pat/167/par/E38000220/ati/7/iid/253/age/1/sex/4/cat/-1/ctp/-1/yrr/1/cid/4/tbm/1
@@ -35,5 +35,5 @@ In order to see the national distribution of asthma, the dashboard also features
 
 Each visualisation provides clues and interesting aspects that can be used to inform each of the others. For instance, seeing that the national picture has a particularly high cluster around the northwest might inform how you interpret the data from the scatter diagram.
 
-the story/conclusions
+## The Story/Conclusion
 
