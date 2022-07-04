@@ -16,3 +16,9 @@ This data was then exported into two different .csv files. One .csv is for the g
 Unfortunately this data could not be used due to the level of precision given by the OpenWeatherMap API. The outputs from this API only gave 5 unique outputs from 100+ differeent calls due to the measurements being taken over larger areas than anticipated. This was found when creating the visualisations that meant not many conclusions could be made. So the data was then changed to nationwide gp areas.
 
 This was extracted using web scraping, the gp list was extracted by taking the drop down lists. Then using iterations, it was possible to go through each gp area and take the asthma data required. After this the OpenWeatherMap API is used just like before the get the timed data. Then prepared, imported into the database and then a dictionary is created using the data in the exact same way as the Birmingham GP data.
+
+
+visualisations and dashboard
+
+the story/conclusions
+
