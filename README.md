@@ -35,5 +35,7 @@ In order to see the national distribution of asthma, the dashboard also features
 
 Each visualisation provides clues and interesting aspects that can be used to inform each of the others. For instance, seeing that the national picture has a particularly high cluster around the northwest might inform how you interpret the data from the scatter diagram.
 
+The visualisations on the page are drawn in plotly, with an externally-rendered leaflet heatmap in an iframe (visible online at https://github.com/grilgamesh/AQI_heatmap.git, https://grilgamesh.github.io/AQI_heatmap/)
+
 ## The Story/Conclusion
 
