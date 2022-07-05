@@ -31,7 +31,7 @@ national_gp=engine.execute("SELECT * FROM national_gp;")
 
 # national air pollution
 NATIONAL_QUERY="""SELECT * FROM national_air_pollution
-    WHERE date >= 1622502000 and date <= 1623106800;
+    WHERE date >= 1622502000 and date <= 1654034400;
 """
 national_air_pollution = engine.execute(NATIONAL_QUERY)
 
@@ -78,7 +78,6 @@ for i in national_air_pollution:
     names.append(i[11])
     times.append(i[1])
     metadata.append({'id':i[0],'time':i[1],'aqi':i[2],'co':i[3],'no':i[4],'no2':i[5],'o3':i[6],'so2':i[7],'nh3':i[8],'pm2_5':i[9],'pm10':i[10],'gp':i[11]})
-    print(i)
 
 names=np.unique(names).tolist()
 times=np.unique(times).tolist()

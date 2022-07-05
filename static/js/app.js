@@ -262,6 +262,7 @@ function init() {
     // console.log(typeof gp_practice_dict);
     // console.log(air_pollution_data);
     // console.log(typeof air_pollution_data);
+    
     // instantiate from the initial data passed from flask app.py to index.html to here
        
 
