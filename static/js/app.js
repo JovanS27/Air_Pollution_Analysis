@@ -6,9 +6,9 @@ function optionChanged(calledGP) {
     console.log(calledGP);
 
     //find the new selection in the data
-    GPid = gp_practice_dict.gp.findIndex((element) => element == calledGP);
+    GPid = national_gp_dict.gp.findIndex((element) => element == calledGP);
     console.log(GPid);
-    let currentGP = gp_practice_dict.metadata[GPid];
+    let currentGP = national_gp_dict.metadata[GPid];
     globalGP = currentGP;
     
 
@@ -23,7 +23,7 @@ function optionChanged(calledGP) {
     console.log(airKeys);
 
     // start building the metadata html to display in the infobox
-    let metaText = "Surgary: " + calledGP + "<hr>";
+    let metaText = "Location: " + calledGP + "<hr>";
     //loop through the keys and insert the relevant text into the metadata
     for (i = 0; i < airKeys.length; i++) {
         // console.log(currentGP[airKeys[i]]);
@@ -34,7 +34,7 @@ function optionChanged(calledGP) {
     
 
     // get the air quality data
-    let timestamps = air_pollution_data.date_time;
+    let timestamps = national_air_pollution_data.date_time;
     console.log(timestamps);
     let dateStrings = []
     //copy the data into javascript format by multiplying by 1000
@@ -52,13 +52,14 @@ function optionChanged(calledGP) {
     };
     console.log(yvalues);
 
+
     // loop through ALL of the metadata
-    for (let i = 0; i < air_pollution_data.metadata.length; i++) {
+    for (let i = 0; i < national_air_pollution_data.metadata.length; i++) {
         //identify the data for the correct GP
-        if (air_pollution_data.metadata[i].gp == calledGP){
+        if (national_air_pollution_data.metadata[i].gp == calledGP){
             // write in the different data measures into the yvalues array, using the defined array airKeys
             for( j=0; j<airKeys.length; j++){
-                yvalues[j].push(air_pollution_data.metadata[i][airKeys[j]]);
+                yvalues[j].push(national_air_pollution_data.metadata[i][airKeys[j]]);
             }
         }
     };
@@ -79,8 +80,8 @@ function optionChanged(calledGP) {
     // Apply layout settings
     let layout = {
         title: calledGP,
-        height: 500,
-        width: 800,
+        height: 450,
+        width: 700,
         xaxis: {
             autorange: true,
             type: 'linear',
@@ -129,6 +130,8 @@ function newScat(calledPollutant){
     scatter_labels = [];
     var violist = []
 
+    var diagramSize = 600;
+
     console.log(national_gp_dict.gp.length);
     
     for (let i = 0; i < national_gp_dict.gp.length; i++) {
@@ -156,25 +159,25 @@ function newScat(calledPollutant){
             size: 13,
             color: '#0000FF'
         }
-    // };
-    // var highlight = {
-    //     type: "scatter",
-    //     x: [currentGP[calledPollutant]],
-    //     y: [currentGP.asthma_percentage],
-    //     text: currentGP.gp,
-    //     mode: 'markers',
-    //     opacity: 0.61,
-    //     marker: {
-    //         size: 21,
-    //         color: "#FFFF00"
-    //     }
     };
-    data = [trace3];
+    var highlight = {
+        type: "scatter",
+        x: [globalGP[calledPollutant]],
+        y: [globalGP.asthma_percentage],
+        text: globalGP.gp,
+        mode: 'markers',
+        opacity: 0.61,
+        marker: {
+            size: 21,
+            color: "#FFFF00"
+        }
+    };
+    data = [trace3, highlight];
     layout = {
         title: 'How well air quality predicts asthma prevalence',
         showlegend: false,
-        height: 500,
-        width: 800,
+        height: diagramSize,
+        width: diagramSize,
         xaxis: {
             title: {
                 text: calledPollutant + ", micrograms per cubic metre"
@@ -211,7 +214,7 @@ function newScat(calledPollutant){
       
       var layout = {          
         title: "",  
-        width: 800,        
+        width: diagramSize,        
         yaxis: {          
           zeroline: false          
         }          
@@ -240,7 +243,7 @@ function newScat(calledPollutant){
       
       var layout = {          
         title: "", 
-        height: 500,         
+        height: diagramSize,         
         yaxis: {          
           zeroline: false          
         }          
@@ -255,14 +258,14 @@ function newScat(calledPollutant){
 function init() {
         
     console.log("czechpoint init");
-    console.log(gp_practice_dict);
-    console.log(typeof gp_practice_dict);
-    console.log(air_pollution_data);
-    console.log(typeof air_pollution_data);
+    // console.log(gp_practice_dict);
+    // console.log(typeof gp_practice_dict);
+    // console.log(air_pollution_data);
+    // console.log(typeof air_pollution_data);
     // instantiate from the initial data passed from flask app.py to index.html to here
        
 
-    let defaultGP = gp_practice_dict.metadata[100].gp;
+    let defaultGP = national_air_pollution_data.metadata[0].gp;
     console.log("default GP set to:");
     console.log(defaultGP);
 
@@ -270,7 +273,7 @@ function init() {
     // Use D3 to select the dropdown and add options to it;
     let dropDown = d3.select("#selDataset");
     var options = dropDown.selectAll("option")
-        .data(gp_practice_dict.gp)
+        .data(national_gp_dict.gp)
         .enter()
         .append("option");
 
@@ -311,6 +314,7 @@ function init() {
 
 console.log("czechpoint 2");
 console.log(national_gp_dict);
-console.log(gp_practice_dict);
-console.log(air_pollution_data);
+// console.log(gp_practice_dict);
+// console.log(air_pollution_data);
+console.log(national_air_pollution_data);
 init();
