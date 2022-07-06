@@ -55,7 +55,9 @@ If you want to interact with the application yourself, please follow these instr
 After cloning this repo, you must run several files in the correct order:
 
 1: run the WebScrape.ipynb file in jupyter notebook, ensuring that it completes (you may need to maximise the chrome window that opens in order for this to succeed; even then it may take several goes. keep trying and eventually it will work);
+
 2: run load.py to create the database;
+
 3: run app.py to launch the flask application. 
 
 The application should then be running at address given in the terminal. 
