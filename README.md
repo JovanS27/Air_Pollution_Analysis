@@ -50,8 +50,10 @@ The appearance of the heat map changes as we tuned it for blur and radius - this
 We have only taken about a year of air quality data, compared with a very long-term data that is percentage of asthma sufferers; this could potentially 
 weaken the link between the datasets we joined.
 
-## Running the app on your computer.
+## Running the app on your computer
+
 If you want to interact with the application yourself, please follow these instructions.
+
 After cloning this repo, you must run several files in the correct order:
 
 1: run the WebScrape.ipynb file in jupyter notebook, ensuring that it completes (you may need to maximise the chrome window that opens in order for this to succeed; even then it may take several goes. keep trying and eventually it will work);
@@ -62,3 +64,5 @@ After cloning this repo, you must run several files in the correct order:
 
 The application should then be running at address given in the terminal. 
 
+
+## Thank you for reading and enjoy our project.
