@@ -35,5 +35,34 @@ In order to see the national distribution of asthma, the dashboard also features
 
 Each visualisation provides clues and interesting aspects that can be used to inform each of the others. For instance, seeing that the national picture has a particularly high cluster around the northwest might inform how you interpret the data from the scatter diagram.
 
-## The Story/Conclusion
+The visualisations on the page are drawn in plotly, with an externally-rendered leaflet heatmap in an iframe (visible online at https://github.com/grilgamesh/AQI_heatmap.git, https://grilgamesh.github.io/AQI_heatmap/)
 
+## The Story/Conclusion
+The Northwest of England - around Lancashire - is the largest hotspot for asthma.
+
+Ozone (O3) seems to correlate with asthma prevalence particularly, while some other pollutants seem to have a slight negative correlation.
+
+Air quality fluctuates widely on an hour by hour basis, and the reasoning isn’t always clear.
+
+Caveats:
+The appearance of the heat map changes as we tuned it for blur and radius - this could possibly lead to misleading results.
+
+We have only taken about a year of air quality data, compared with a very long-term data that is percentage of asthma sufferers; this could potentially 
+weaken the link between the datasets we joined.
+
+## Running the app on your computer
+
+If you want to interact with the application yourself, please follow these instructions.
+
+After cloning this repo, you must run several files in the correct order:
+
+1: run the WebScrape.ipynb file in jupyter notebook, ensuring that it completes (you may need to maximise the chrome window that opens in order for this to succeed; even then it may take several goes. keep trying and eventually it will work);
+
+2: run load.py to create the database;
+
+3: run app.py to launch the flask application. 
+
+The application should then be running at address given in the terminal. 
+
+
+## Thank you for reading and enjoy our project.
