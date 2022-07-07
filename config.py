@@ -1,0 +1,3 @@
+OWM=""
+GOOGLE=""
+postgresPass=""
